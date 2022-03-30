@@ -1,0 +1,7 @@
+gnlkiller
+gnlTester
+42testers_gnl
+*test
+main*.c
+test.dsym
+*.swp
