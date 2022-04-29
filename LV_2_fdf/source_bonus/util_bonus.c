@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   util_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 16:11:42 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/04/29 14:33:45 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:23:56 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	ft_print_dot(t_mlx *fdf)
 {
@@ -64,6 +64,9 @@ void	ft_min_max_altitude(t_map **map)
 
 void	ft_starting_point(t_mlx *temp)
 {
+	temp->info_save = (t_info *)malloc(sizeof(t_info));
+	if (temp->info_save == NULLL)
+		ft_mlx_flush(temp, STD_ERR);
 	temp->info->scale = ft_min(temp->info->x_scale, temp->info->y_scale);
 	temp->info->x_start = (HD_WIDTH / 2) - \
 						(temp->map->height * temp->info->scale * 2);
@@ -72,4 +75,8 @@ void	ft_starting_point(t_mlx *temp)
 	temp->info->x_scale = 1;
 	temp->info->y_scale = 1;
 	temp->info->project = 1;
+	temp->info->x_scalar = 0;
+	temp->info->y_scalar = 0;
+	temp->info->z_scalar = 0;
+	ft_info_cpy(temp, 1);
 }

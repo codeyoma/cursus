@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 16:38:33 by yongmkim          #+#    #+#              #
-#    Updated: 2022/04/25 18:17:08 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/04/29 14:18:33 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ AR_FLAG		=	rcus
 
 OBJ_DIR		=	./object/
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
-OBJ_B		=	$(SRC_BN:.c=.o)
+OBJECT		=	$(OBJ)
 
 #	Library
 # PRIN_DIR	=	./ft_printf/
@@ -88,24 +88,6 @@ SRC			=	ft_substr.c			\
 				ft_word_count.c		\
 				ft_abs.c			\
 
-SRC_BN		=	ft_lstnew.c			\
-				ft_lstsize.c		\
-				ft_lstadd_front.c	\
-				ft_lstlast.c		\
-				ft_lstadd_back.c	\
-				ft_lstdelone.c		\
-				ft_lstclear.c		\
-				ft_lstiter.c		\
-				ft_lstmap.c			\
-
-
-#	Bonus
-ifdef WITH_BONUS
-	OBJECT	=	$(OBJ) $(OBJ_B)
-else
-	OBJECT	=	$(OBJ)
-endif
-
 #	Custom
 GREEN		=	\e[38;5;118m
 YELLOW		=	\e[38;5;226m
@@ -164,15 +146,14 @@ fclean		:
 
 re			:	fclean all
 
-bonus		:
-		@make WITH_BONUS=1 all
+bonus		:	all
 
-b			: bonus
+b			:	bonus
 
-m			: all
+m			:	all
 
-clear		: clean
+clear		:	clean
 
-fclear		: fclean
+fclear		:	fclean
 
-.PHONY : all clean fclean re bonus clear fclear
+.PHONY : all clean fclean re bonus clear fclear b m 

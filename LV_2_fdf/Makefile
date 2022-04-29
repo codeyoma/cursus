@@ -6,18 +6,52 @@
 #    By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/20 16:14:43 by yongmkim          #+#    #+#              #
-#    Updated: 2022/04/26 21:34:13 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/04/30 01:42:56 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-#==================================
+#==============================================================================
+#░░░░░░███╗░░░███╗░█████╗░██╗░░██╗███████╗███████╗██╗██╗░░░░░███████╗░░░░░░░░░░
+#░░░░░░████╗░████║██╔══██╗██║░██╔╝██╔════╝██╔════╝██║██║░░░░░██╔════╝░░░░░░░░░░
+#░░░░░░██╔████╔██║███████║█████═╝░█████╗░░█████╗░░██║██║░░░░░█████╗░░░░░░░░░░░░
+#░░░░░░██║╚██╔╝██║██╔══██║██╔═██╗░██╔══╝░░██╔══╝░░██║██║░░░░░██╔══╝░░░░░░░░░░░░
+#░░░░░░██║░╚═╝░██║██║░░██║██║░╚██╗███████╗██║░░░░░██║███████╗███████╗░░░░░░░░░░
+#░░░░░░╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝╚══════╝╚══════╝░░░░░░░░░░
+#==============================================================================
+#	Color
+#==============================================================================
+GREEN		=	\e[38;5;118m
+YELLOW		=	\e[38;5;226m
+ORANGE		=	\e[38;5;214m
+BLUE_PURPLE	=	\e[38;5;057m
+PURPLE		=	\e[38;5;165m
+RESET		=	\e[0m
+_SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
+_SUCCESS_	=	[$(ORANGE)SUCCESS$(RESET)]
+_INFO		=	[$(ORANGE)INFO$(RESET)]
+_NAME		=	[$(GREEN)$(NAME)$(RESET)]
+_CLEAN		=	[$(BLUE_PURPLE)$(NAME)$(RESET)]
+_NAME_B		=	[$(GREEN)$(NAME_B)$(RESET)]
+_PROG		=	$(_INFO) [$(ORANGE)$(NAME)$(RESET)] - Compile $(YELLOW)
+_DONE		=	$(GREEN)✓$(RESET)
+#	Loading bar
+#==============================================================================
+SHELL	=	/bin/bash
+sp		=	/-\|/
+idx		=	0
+#░░░░░░░░░░░░░░░░░░░░░██╗░░░██╗░█████╗░███╗░░░███╗░█████╗░░░░░░░░░░░░░░░░░░░░░░
+#░░░░░░░░░░░░░░░░░░░░░╚██╗░██╔╝██╔══██╗████╗░████║██╔══██╗░░░░░░░░░░░░░░░░░░░░░
+#░░░░░░░░░░░░░░░░░░░░░░╚████╔╝░██║░░██║██╔████╔██║███████║░░░░░░░░░░░░░░░░░░░░░
+#░░░░░░░░░░░░░░░░░░░░░░░╚██╔╝░░██║░░██║██║╚██╔╝██║██╔══██║░░░░░░░░░░░░░░░░░░░░░
+#░░░░░░░░░░░░░░░░░░░░░░░░██║░░░╚█████╔╝██║░╚═╝░██║██║░░██║░░░░░░░░░░░░░░░░░░░░░
+#░░░░░░░░░░░░░░░░░░░░░░░░╚═╝░░░░╚════╝░╚═╝░░░░░╚═╝╚═╝░░╚═╝░░░░░░░░░░░░░░░░░░░░░
+#==============================================================================
 # 	Target Name
-#==================================
+#==============================================================================
 NAME		=	fdf
 
-#==================================
+#==============================================================================
 #	Source
-#==================================
+#==============================================================================
 SRC			=	main.c	\
 				error.c	\
 				map.c	\
@@ -28,21 +62,29 @@ SRC			=	main.c	\
 				project.c	\
 				draw.c	\
 
+SRC_B		=	main_bonus.c	\
+				error_bonus.c	\
+				map_bonus.c	\
+				util_bonus.c	\
+				util_map_bonus.c	\
+				key_bonus.c	\
+				key_util_bonus.c	\
+				render_bonus.c	\
+				project_bonus.c	\
+				draw_bonus.c		\
 
-SRC_B		=		\
-
-#==================================
+#==============================================================================
 #	Directory
-#==================================
-SRC_DIR		=	./source/
-INC_DIR		=	./include/
+#==============================================================================
+#SRC_DIR		=	./source/
+#INC_DIR		=	./include/
 OBJ_DIR		=	./object/
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 OBJ_B		=	$(addprefix $(OBJ_DIR), $(SRC_B:.c=.o))
 
-#==================================
+#==============================================================================
 #	Library
-#==================================
+#==============================================================================
 LIB_DIR		= 	./library/
 LIB_LNK		=	$(LIBFT_LNK) $(MLX_LNK) -l m
 LIB_INC		=	$(LIBFT_INC) $(MLX_INC) -I $(INC_DIR)
@@ -56,65 +98,50 @@ MLX_DIR 	=	$(LIB_DIR)mlx_mms/
 MLX_INC		=	-I $(MLX_DIR)
 MLX_LNK		=	-L $(MLX_DIR) -l mlx -framework OpenGL -framework AppKit
 
-#==================================
+#==============================================================================
 #	Compile
-#==================================
+#==============================================================================
 CC			=	gcc
-#CC_FLAG		=	-Wall -Wextra -Werror
-CC_FLAG		=	
-CFLAG		=	$(CC_FLAG)
+CC_FLAG		=	-Wall -Wextra -Werror
 RM			=	rm
 RM_FLAG		=	-f
-SNTZ		=	-g -fsanitize=address
+SNTZ		=	-g -fsanitize=address -fno-omit-frame-pointer
+MEM			=	-g -fsanitize=memory -fsanitize-memory-track-origins \
+				-fPIE -pie -fno-omit-frame-pointer
+LEAK		=	-g -fsanitize=leak
 DEBUG		=	-g
 
-#==================================
-#	Bonus
-#==================================
+#==============================================================================
+#	Basic Flag
+#==============================================================================
+CFLAG		=	$(CC_FLAG)
 ifdef WITH_BONUS
-	OBJECT	=	$(OBJ) $(OBJ_B)
+	SRC_DIR	=	./source_bonus/
+	INC_DIR	=	./include_bonus/
+	OBJECT	=	$(OBJ_B)
 else
+	SRC_DIR	=	./source/
+	INC_DIR	=	./include/
 	OBJECT	=	$(OBJ)
 endif
 
-#	Sanitize
-
-#	Debug : -g
-ifdef WITH_DEBUG
-	CFLAG	=	$(CC_FLAG) $(DEBUG)
-else
-	CFLAG	=	$(CC_FLAG)
-endif
-
-#==================================
-#	Color
-#==================================
-GREEN		=	\e[38;5;118m
-YELLOW		=	\e[38;5;226m
-ORANGE		=	\e[38;5;214m
-BLUE_PURPLE	=	\e[38;5;057m
-PURPLE		=	\e[38;5;165m
-RESET		=	\e[0m
-_SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
-_INFO		=	[$(ORANGE)INFO$(RESET)]
-_NAME		=	[$(GREEN)$(NAME)$(RESET)]
-_CLEAN		=	[$(BLUE_PURPLE)$(NAME)$(RESET)]
-_NAME_B		=	[$(GREEN)$(NAME_B)$(RESET)]
-_PROG		=	$(_INFO) [$(ORANGE)$(NAME)$(RESET)] - Compile $(YELLOW)
-_DONE		=	$(GREEN)✓$(RESET)
-
-#	Loading bar
-SHELL	=	/bin/bash
-sp		=	/-\|/
-idx		=	0
-
-
-
 #==============================================================================
-#	Make  
+#	Make Part 
 #==============================================================================
+.PHONY		:	all 
 all			:	obj_dir $(NAME)
 
+$(NAME)		:	lib_make $(OBJECT)
+		@if [ $(idx) -gt 0 ]; then\
+			printf "\b$(_DONE)\n";\
+		fi
+		@$(CC) $(CFLAG) $(LIB_LNK) $(OBJECT) -o $(NAME)
+		@printf "$(_SUCCESS) $(_NAME) - all $(_DONE)\n"
+
+#==============================================================================
+#	Object file, library Make  
+#==============================================================================
+.PHONY		:	obj_dir lib_make lib_clear lib_fclear
 obj_dir		:
 		@mkdir -p $(OBJ_DIR)
 
@@ -127,13 +154,6 @@ lib_clear	:
 lib_fclear	:
 		@$(MAKE) -C $(LIB_DIR) fclean
 
-$(NAME)		:	lib_make $(OBJECT)
-		@if [ $(idx) -gt 0 ]; then\
-			printf "\b$(_DONE)\n";\
-		fi
-		@$(CC) $(CFLAG) $(LIB_LNK) $(OBJECT) -o $(NAME)
-		@printf "$(_SUCCESS) $(_NAME) - all $(_DONE)\n"
-
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c $(INC_DIR)
 		$(eval idx = $(shell expr $(idx) + 1))
 		$(eval t_idx = $(shell expr $(idx) % 4 + 1))
@@ -142,14 +162,20 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c $(INC_DIR)
 			printf "   $(_PROG) ";\
 		fi
 		@printf "\b$(chr)"
-		@$(CC) $(CC_FLAG) $(LIB_INC) -o $@ -c $<
+		@$(CC) $(CFLAG) $(LIB_INC) -o $@ -c $<
 
+#==============================================================================
+#	clean fclean re
+#==============================================================================
+.PHONY		:	clean fclean re clear fclear bonus b bonussntz
+clear		:	clean
 clean		:
 		@$(RM) -rf $(OBJ_DIR)
 		@make lib_clear
 		@$(RM) $(RM_FLAG) $(OBJECT) $(OBJ_B)
 		@printf "   $(_INFO) $(_CLEAN) - clean $(_DONE)\n"
 
+fclear		:	fclean
 fclean		:
 		@$(RM) -rf $(OBJ_DIR)
 		@make lib_fclear
@@ -158,34 +184,50 @@ fclean		:
 
 re			:	fclean all
 
+b			:	bonus
 bonus		:
 		@make WITH_BONUS=1 all
+		@printf "$(_SUCCESS_) $(_NAME) - bonus $(_DONE)\n"
+bonussntz	:	CFLAG+=$(SNTZ)
+bonussntz	:
+		@make WITH_BONUS=1 all
+		@printf "$(_SUCCESS_) $(_NAME) - bonus $(_DONE)\n"
 
-sntz		:	lib_make $(OBJECT)
-		@if [ $(idx) -gt 0 ]; then\
-			printf "\b$(_DONE)\n";\
-		fi
-		@$(CC) $(CFLAG) $(SNTZ) $(LIB_LNK) $(OBJECT) -o $(NAME)
-		@printf "   $(_INFO) $(_NAME) - sntz $(_DONE)\n"
+#==============================================================================
+#	Sanitizer Memory Leak
+#==============================================================================
+.PHONY		:	sntz mem leak m s
+s			:	sntz
+sntz		:	CFLAG+=$(SNTZ)
+sntz		:	all
+		@printf "$(_SUCCESS_) $(_NAME) - sntz $(_DONE)\n"
 
-debug		:	lib_make $(OBJECT)
-		@if [ $(idx) -gt 0 ]; then\
-			printf "\b$(_DONE)\n";\
-		fi
-		@$(CC) $(CFLAG) $(DEBUG) $(LIB_LNK) $(OBJECT) -o $(NAME)
-		@printf "   $(_INFO) $(_NAME) - debug $(_DONE)\n"
+m			:	mem
+mem			:	CFLAG+=$(MEM)
+mem			:	all
+		@printf "$(_SUCCESS_) $(_NAME) - mem $(_DONE)\n"
 
+leak		:	CFLAG+=$(LEAK)
+leak		:	all
+		@printf "$(_SUCCESS_) $(_NAME) - leak $(_DONE)\n"
+
+#==============================================================================
+#	Debug
+#==============================================================================
+.PHONY		:	debug lldb d
 lldb		:	debug
+d			:	debug
+debug		:	CFLAG+=$(DEBUG)
+debug		:	all
+		@printf "$(_SUCCESS_) $(_NAME) - debug $(_DONE)\n"
 
-b			:	bonus
-
-m			:	all
-
-clear		:	clean
-
-fclear		:	fclean
-
-show		:
+#==============================================================================
+#	Show & Command List
+#==============================================================================
+.PHONY		:	show command com list
+list		:	show
+show		:	command
+		@make big_flag
 		@printf "NAME	: $(NAME)\n"
 		@printf "CC	: $(CC)\n"
 		@printf "CC_FLAG	: $(CC_FLAG)\n"
@@ -196,8 +238,53 @@ show		:
 		@printf "LIB_INC	: $(LIB_INC)\n"
 		@printf "LIB_LNK	: $(LIB_LNK)\n"
 		@printf "SRC	: $(SRC)\n"
+		@printf "SRC_B	: $(SRC_B)\n"
+		@printf "\n"
 
-list		:	show
+com			:	command
+command		:
+		@make big_com
+		@printf "all	: default, create target\n"
+		@printf "clean	: del *.o\n"
+		@printf "fclean	: [clean] + del target\n"
+		@printf "re	: [fclean] + [all]\n"
+		@printf "show	: print info\n"
+		@printf "command	: print command list\n"
+		@printf "sntz	: $(SNTZ)\n"
+		@printf "mem	: $(MEM)\n"
+		@printf "leak	: $(LEAK)\n"
+		@printf "debug	: $(DEBUG)\n"
+		@make big_alias
+		@printf "clear	: [clean]\n"
+		@printf "fclear	: [fclean]\n"
+		@printf "list	: [show]\n"
+		@printf "com	: [command]\n"
+		@printf "lldb	: [debug]\n"
+		@printf "s	: [sntz]\n"
+		@printf "m	: [mem]\n"
+		@printf "d	: [debug]\n"
 
-.PHONY		:	all clean fclean re bonus b m sntz debug lldb clear obj_dir \
-				lib_make lib_clear lib_fclear show list \
+#==============================================================================
+#	Print Big text letter
+#==============================================================================
+.PHONY		:	big_com	big_alias big_flag
+big_com		:
+		@printf "\n$(YELLOW)"
+		@printf "█▀▀ █▀█ █▀▄▀█ █▀▄▀█ ▄▀█ █▄░█ █▀▄   █░░ █ █▀ ▀█▀\n"
+		@printf "█▄▄ █▄█ █░▀░█ █░▀░█ █▀█ █░▀█ █▄▀   █▄▄ █ ▄█ ░█░\n"
+		@printf "$(RESET)"
+
+big_alias	:
+		@printf "\n$(ORANGE)"
+		@printf "▄▀█ █░░ █ ▄▀█ █▀   █░░ █ █▀ ▀█▀\n"
+		@printf "█▀█ █▄▄ █ █▀█ ▄█   █▄▄ █ ▄█ ░█░\n"
+		@printf "$(RESET)"
+
+big_flag	:
+		@printf "\n$(GREEN)"
+		@printf "█▀▀ █░░ ▄▀█ █▀▀   █░░ █ █▀ ▀█▀\n"
+		@printf "█▀░ █▄▄ █▀█ █▄█   █▄▄ █ ▄█ ░█░\n"
+		@printf "$(RESET)"
+#==============================================================================
+#	End of Makeflie
+#==============================================================================

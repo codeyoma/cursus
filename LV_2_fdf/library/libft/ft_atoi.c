@@ -6,7 +6,7 @@
 /*   By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 11:00:13 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/04/23 02:25:26 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/04/29 03:09:45 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ft_atoi_base(char *str, int base)
 		str++;
 	}
 	if (*str == 'x' && sum % 10 == 0)
-		return ((sum / 10)* sign);
+		return ((sum / 10) * sign);
 	return (sum * sign);
 }
 

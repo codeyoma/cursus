@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:01:02 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/04/29 15:09:01 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:23:22 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include "mlx.h"
 #include <math.h>
 #include "libft.h"
@@ -28,6 +28,8 @@ void	ft_mlx_flush(t_mlx *temp, int key)
 			ft_memflush((void **)&(temp->info->title));
 		ft_memflush((void **)&(temp->info));
 	}
+	if (temp->info_save != NULLL)
+		ft_memflush((void **)&(temp->info_save));
 	if (temp->mlx != NULLL)
 		ft_memflush((void **)&(temp->mlx));
 	if (temp != NULLL)
@@ -48,6 +50,7 @@ static t_mlx	*ft_first_init_set_value(void)
 		temp->win = NULLL;
 		temp->img = NULLL;
 		temp->info = NULLL;
+		temp->info_save = NULLL;
 	}
 	return (temp);
 }
@@ -74,6 +77,9 @@ static void	ft_init_img(t_mlx *temp, char *file)
 	temp->info->x_scale = ft_max(HD_WIDTH / temp->map->width / 3, 1);
 	temp->info->y_scale = ft_max(HD_HEIGHT / temp->map->height / 3, 1);
 	temp->info->z_scale = 1;
+	temp->info->aspect_ratio = ((float)temp->map->height / temp->map->width);
+	if ((float)temp->map->width / temp->map->height > temp->info->aspect_ratio)
+		temp->info->aspect_ratio = (float)temp->map->width / temp->map->height;
 	ft_starting_point(temp);
 }
 

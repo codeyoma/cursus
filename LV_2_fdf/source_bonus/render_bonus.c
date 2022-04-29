@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 16:55:37 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/04/29 14:32:49 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:23:49 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include "mlx.h"
 #include <math.h>
 #include "libft.h"
@@ -19,9 +19,12 @@ static t_dot	cam_modi_dot(t_dot *v1, t_mlx *fdf)
 {
 	t_dot	temp;
 
-	temp.x = (((float)v1->x * (float)fdf->info->scale));
-	temp.y = (((float)v1->y * (float)fdf->info->scale));
-	temp.z = ((float)v1->z * (float)fdf->info->scale * 2);
+	temp.x = (((float)v1->x * (float)fdf->info->scale) * fdf->info->x_scale);
+	temp.y = (((float)v1->y * (float)fdf->info->scale) * fdf->info->y_scale);
+	temp.z = ((float)v1->z * (float)fdf->info->scale * fdf->info->z_scale * \
+			2);
+	if (fdf->info->project & 2)
+		ft_rotate_angle(&temp, fdf);
 	if (fdf->info->project & 1)
 		iso(&temp);
 	temp.color = v1->color;

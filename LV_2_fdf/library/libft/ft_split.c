@@ -6,7 +6,7 @@
 /*   By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 23:14:26 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/04/26 15:03:26 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/04/29 03:09:36 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	ft_arr_matrix_size(char **split)
 {
-	int i;
+	int	i;
 
 	if (split == NULLL)
 		return (0);
