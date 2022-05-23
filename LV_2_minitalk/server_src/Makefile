@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 14:01:24 by yongmkim          #+#    #+#              #
-#    Updated: 2022/03/01 22:18:05 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/05/23 20:00:59 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,12 +69,11 @@ _NAME		=	[$(YELLOW)$(NAME)$(RESET)]
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJECT)
-		@$(CC) $(CFLAG) $(LIB_FLAG) $(DIR) $(OBJECT) -o $(NAME)
-#		@mv $(NAME) ../
+		@$(CC) $(CC_FLAG) $(LIB_FLAG) $(DIR) $(OBJECT) -o $(NAME)
 		@printf "$(_SUCCESS) $(_NAME) - Make all done\n"
 
-# %.o			:	%.c
-# 		$(CC) $(CFLAG) -c $^ -o $@
+%.o			:	%.c
+		$(CC) $(CC_FLAG) -c $^ -o $@
 
 clean		:
 		@$(RM) $(RM_FLAG) $(OBJ) $(OBJ_B)
